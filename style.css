@@ -1,0 +1,106 @@
+body {
+    background-color: #ccccff;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5rem;
+}
+
+#calculator {
+    display: grid;
+    width: 360px;
+    height: 480px;
+    border-radius: 15px;
+    background-color: honeydew;
+    border: 1px solid gray;
+    grid-template-areas: 
+    "fn fn fn fn"
+    "ds ds ds ds"
+    "k1 k2 k3 k4"
+    "k5 k6 k7 k8"
+    "k9 k10 k11 k12"
+    "k13 k14 k15 k16"
+    "k17 k18 k19 k19";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.itemFn {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding-right: 2rem;
+    font-size: 2rem;
+    color: gray;
+    border-radius: 15px 15px 0 0;
+    border: 1px solid gray;
+    text-shadow: 1px 1px #6699ff;
+}
+
+.itemDs {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding-right: 2rem;
+    font-size: 5rem;
+    color: gray;
+    border: 1px solid gray;
+    text-shadow: 1px 1px #6699ff;
+}
+
+.item4, .item8, .item12, .item16, .item19 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    color: white;
+    border: 1px solid gray;
+    text-shadow: 1px 1px grey;
+    background-color: #6699ff;
+}
+
+.item1, .item2, .item3, .item5, .item6, .item7, .item9, .item10, .item11, .item13, .item14, .item15, .item17, .item18 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    color: #6699ff;
+    border: 1px solid gray;
+    text-shadow: 1px 1px lightgrey;
+    background-color: white;
+}
+
+.item17 {
+    border-radius: 0 0 0 15px;
+}
+
+.item19 {
+    border-radius: 0 0 15px 0;
+}
+
+.itemFn { grid-area: fn; }
+.itemDs { grid-area: ds; }
+.item1 { grid-area: k1; }
+.item2 { grid-area: k2; }
+.item3 { grid-area: k3; }
+.item4 { grid-area: k4; }
+.item5 { grid-area: k5; }
+.item6 { grid-area: k6; }
+.item7 { grid-area: k7; }
+.item8 { grid-area: k8; }
+.item9 { grid-area: k9; }
+.item10 { grid-area: k10; }
+.item11 { grid-area: k11; }
+.item12 { grid-area: k12; }
+.item13 { grid-area: k13; }
+.item14 { grid-area: k14; }
+.item15 { grid-area: k15; }
+.item16 { grid-area: k16; }
+.item17 { grid-area: k17; }
+.item18 { grid-area: k18; }
+.item19 { grid-area: k19; }

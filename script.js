@@ -1,4 +1,10 @@
 let problemDisplay = document.querySelector("#itemFn");
+let answerDisplay = document.querySelector("#itemDs");
+let decimalButton = document.querySelector("#item18");
+let equalButton = document.querySelector("#item19");
+let clearButton = document.querySelector("#item1");
+let clearEntryButton = document.querySelector("#item2");
+let negativeButton = document.querySelector("#item3");
 let numButton = document.querySelectorAll(".number");
 let opButton = document.querySelectorAll(".operator");
 let numZero = document.querySelector("#item17");
@@ -15,202 +21,184 @@ let opAdd = document.querySelector("#item16");
 let opSub = document.querySelector("#item12");
 let opMult = document.querySelector("#item8");
 let opDiv = document.querySelector("#item4");
-let display = {};
-let CalcNumber1 = [];
-let CalcNumber2 = [];
-let firstNumber;
-let secondNumber;
-let operatorSymbol;
+let result = ""; 
+let number = "";
+let firstNumber = "";
+let secondNumber = "";
+let operatorSymbol = "";
 
-// IF number button clicked, create and display first number
-function showCreateFirstNum() {
+// Assigns and displays first or second operand strings
+function assignNumber(a) {
+    if (operatorSymbol === "") {
+        firstNumber = a;
+        problemDisplay.textContent = firstNumber + " " + operatorSymbol + " " + secondNumber;
+        return firstNumber;
+    } else {
+        secondNumber = a.replace(firstNumber,"");
+        problemDisplay.textContent = firstNumber + " " + operatorSymbol + " " + secondNumber;
+        return secondNumber;
+    }
+}
+
+// IF number button clicked, creates or updates operand strings
+function showCreateNum() {
     for (let i = 0; i < numButton.length; i++) {
         numButton[i].addEventListener("click", function() {
-            if (operatorSymbol !== undefined) {
-                showCreateSecondNum();
-            } else if (numButton[i] === numZero) {
-                CalcNumber1.push("0"); 
-                firstNumber = CalcNumber1.join("");
-                problemDisplay.textContent = firstNumber;
-                return firstNumber;
+            if (numButton[i] === numZero) {
+                number += "0"; 
+                assignNumber(number);
             } else if (numButton[i] === numOne) {
-                CalcNumber1.push("1");
-                firstNumber = CalcNumber1.join("");
-                problemDisplay.textContent = firstNumber;
-                return firstNumber;
+                number += "1"; 
+                assignNumber(number);
             } else if (numButton[i] === numTwo) {
-                CalcNumber1.push("2"); 
-                firstNumber = CalcNumber1.join("");
-                problemDisplay.textContent = firstNumber;
-                return firstNumber;
+                number += "2"; 
+                assignNumber(number);
             } else if (numButton[i] === numThree) {
-                CalcNumber1.push("3");
-                firstNumber = CalcNumber1.join("");
-                problemDisplay.textContent = firstNumber;
-                return firstNumber;
+                number += "3"; 
+                assignNumber(number);
             } else if (numButton[i] === numFour) {
-                CalcNumber1.push("4"); 
-                firstNumber = CalcNumber1.join("");
-                problemDisplay.textContent = firstNumber;
-                return firstNumber;
+                number += "4"; 
+                assignNumber(number);
             } else if (numButton[i] === numFive) {
-                CalcNumber1.push("5"); 
-                firstNumber = CalcNumber1.join("");
-                problemDisplay.textContent = firstNumber;
-                return firstNumber;
+                number += "5"; 
+                assignNumber(number);
             } else if (numButton[i] === numSix) {
-                CalcNumber1.push("6"); 
-                firstNumber = CalcNumber1.join("");
-                problemDisplay.textContent = firstNumber;
-                return firstNumber;
+                number += "6"; 
+                assignNumber(number);
             } else if (numButton[i] === numSeven) {
-                CalcNumber1.push("7"); 
-                firstNumber = CalcNumber1.join("");
-                problemDisplay.textContent = firstNumber;
-                return firstNumber;
+                number += "7"; 
+                assignNumber(number);
             } else if (numButton[i] === numEight) {
-                CalcNumber1.push("8"); 
-                firstNumber = CalcNumber1.join("");
-                problemDisplay.textContent = firstNumber;
-                return firstNumber;
+                number += "8"; 
+                assignNumber(number);
+            } else if (numButton[i] === numNine) {
+                number += "9"; 
+                assignNumber(number);
+            } else if (numButton[i] === decimalButton) {
+                if (number.includes(".")) {
+                    return;
+                } else {
+                    number += "."; 
+                    assignNumber(number);
+                }
             } else {
-                CalcNumber1.push("9"); 
-                firstNumber = CalcNumber1.join("");
-                problemDisplay.textContent = firstNumber;
-                return firstNumber;
+                return;
             }
         })
     }
-};
+}
 
-// IF operator button clicked, create and display operator
-function showOperator() {
+// IF operator button clicked, creates and displays operator string
+function showOp() {
     for (let i = 0; i < opButton.length; i++) {
         opButton[i].addEventListener("click", function() {
-            if (firstNumber === undefined) {
-                return;
-            } else if (opButton[i] === opAdd) {
-                problemDisplay.innerHTML = firstNumber + " + ";
-                let operatorSymbol = "+";
+            if (result !== "") {
+                firstNumber = result;
+                operatorSymbol = "";
+                secondNumber = "";
+                number = ""
+                problemDisplay.innerHTML = textContent = firstNumber + " " + operatorSymbol + " " + secondNumber;
+            }
+            if (opButton[i] === opAdd) {
+                operatorSymbol += "+";
+                problemDisplay.innerHTML = textContent = firstNumber + " " + operatorSymbol;
+                return operatorSymbol;
             } else if (opButton[i] === opSub) {
-                problemDisplay.innerHTML = firstNumber + " - ";
-                let operatorSymbol = "+";
+                operatorSymbol += "-";
+                problemDisplay.innerHTML = textContent = firstNumber + " " + operatorSymbol;
+                return operatorSymbol;
             } else if (opButton[i] === opMult) {
-                problemDisplay.innerHTML = firstNumber + " x ";
-                let operatorSymbol = "x";
+                operatorSymbol += "x";
+                problemDisplay.innerHTML = textContent = firstNumber + " " + operatorSymbol;
+                return operatorSymbol;
             } else {
-                problemDisplay.innerHTML = firstNumber + " ÷ ";
-                let operatorSymbol = "÷";
+                operatorSymbol += "÷";
+                problemDisplay.innerHTML = textContent = firstNumber + " " + operatorSymbol;
+                return operatorSymbol;
             }
         })
         
     }
 }
 
-// IF number button clicked, create and display second number
-function showCreateSecondNum() {
-    for (let i = 0; i < numButton.length; i++) {
-        numButton[i].addEventListener("click", function() {
-            if (firstNumber === undefined || operatorSymbol === undefined) {
-                return;
-            } else if (numButton[i] === numZero) {
-                CalcNumber2.push("0"); 
-                secondNumber = CalcNumber2.join("");
-                problemDisplay.innerHTML = firstNumber + " " + operatorSymbol + " " + secondNumber;
-                return secondNumber;
-            } else if (numButton[i] === numOne) {
-                CalcNumber2.push("1");
-                firstNumber = CalcNumber2.join("");
-                problemDisplay.innerHTML = firstNumber + " " + operatorSymbol + " " + secondNumber;
-                return secondNumber;
-            } else if (numButton[i] === numTwo) {
-                CalcNumber2.push("2"); 
-                firstNumber = CalcNumber2.join("");
-                problemDisplay.innerHTML = firstNumber + " " + operatorSymbol + " " + secondNumber;
-                return secondNumber;
-            } else if (numButton[i] === numThree) {
-                CalcNumber2.push("3");
-                firstNumber = CalcNumber2.join("");
-                problemDisplay.innerHTML = firstNumber + " " + operatorSymbol + " " + secondNumber;
-                return secondNumber;
-            } else if (numButton[i] === numFour) {
-                CalcNumber2.push("4"); 
-                firstNumber = CalcNumber2.join("");
-                problemDisplay.innerHTML = firstNumber + " " + operatorSymbol + " " + secondNumber;
-                return secondNumber;
-            } else if (numButton[i] === numFive) {
-                CalcNumber2.push("5"); 
-                firstNumber = CalcNumber2.join("");
-                problemDisplay.innerHTML = firstNumber + " " + operatorSymbol + " " + secondNumber;
-                return secondNumber;
-            } else if (numButton[i] === numSix) {
-                CalcNumber2.push("6"); 
-                firstNumber = CalcNumber2.join("");
-                problemDisplay.innerHTML = firstNumber + " " + operatorSymbol + " " + secondNumber;
-                return secondNumber;
-            } else if (numButton[i] === numSeven) {
-                CalcNumber2.push("7"); 
-                firstNumber = CalcNumber2.join("");
-                problemDisplay.innerHTML = firstNumber + " " + operatorSymbol + " " + secondNumber;
-                return secondNumber;
-            } else if (numButton[i] === numEight) {
-                CalcNumber2.push("8"); 
-                firstNumber = CalcNumber2.join("");
-                problemDisplay.innerHTML = firstNumber + " " + operatorSymbol + " " + secondNumber;
-                return secondNumber;
-            } else {
-                CalcNumber2.push("9"); 
-                firstNumber = CalcNumber2.join("");
-                problemDisplay.innerHTML = firstNumber + " " + operatorSymbol + " " + secondNumber;
-                return secondNumber;
-            }
-        })
-    }
-};
-
-function chooseNumber() {
-    if (operatorSymbol !== undefined) {
-        showCreateSecondNum;
-    } else if (operatorSymbol === undefined) {
-        showCreateFirstNum;
-    } else {
-        return;
-    }
-} 
-
-showCreateFirstNum();
-showOperator();
-showCreateSecondNum();
-
-
-function add(a,b) {
-    result = a + b;
-    return result;
-} 
-
-function subtract(a,b) {
-    result = a - b;
-    return result;
-} 
-
-function multiply(a,b) {
-    result = a * b;
-    return result;
-} 
-    
-function divide(a,b) {
-    result = a / b;
-    return result;
+// Completes one opertion: add, subtract, multiple, divide
+function operate() {
+    equalButton.addEventListener("click", function() {
+        let firstOperand = parseFloat(firstNumber);
+        let secondOperand = parseFloat(secondNumber);
+        if (operatorSymbol === "" || secondNumber === "") {
+            return;
+        } else if (secondOperand === 0 && operatorSymbol === "÷") {
+            secondNumber = "";
+            problemDisplay.textContent = firstNumber + " " + operatorSymbol + " " + secondNumber;
+        } else if (operatorSymbol === "+") {
+            result = (firstOperand + secondOperand).toFixed(2);
+            answerDisplay.textContent = result;
+        } else if (operatorSymbol === "-") {
+            result = (firstOperand - secondOperand).toFixed(2);
+            answerDisplay.textContent = result;
+        } else if (operatorSymbol === "x") {
+            result = (firstOperand * secondOperand).toFixed(2);
+            answerDisplay.textContent = result;
+        } else {
+            result = (firstOperand / secondOperand).toFixed(2);
+            answerDisplay.textContent = result;
+        }
+    })
 }
 
-// function operate(num1,num2) {
-//     if addButton {
-//         add(num1,num2);
-//     } else if subtractButton {
-//         subtract(num1,num2);
-//     } else if multiplyButton {
-//         multiply(num1,num2);
-//     } else divideButton {
-//         divide(num1,num2);
-//     }
+// Clears the current entry or the entire problem
+function clear() {
+    clearButton.addEventListener("click", function() {
+        location.reload();
+    })
+    clearEntryButton.addEventListener("click", function() {
+        if (firstNumber && operatorSymbol && secondNumber) {
+            secondNumber = "";
+            problemDisplay.textContent = firstNumber + " " + operatorSymbol + " " + secondNumber;
+        } else if (firstNumber && operatorSymbol) {
+            secondNumber = "";
+            operatorSymbol = "";
+            problemDisplay.textContent = firstNumber + " " + operatorSymbol + " " + secondNumber;
+        } else {
+            location.reload();
+        }
+    })
+}
+
+// Adds or removes negative to/from a particular number
+// function addRemoveNegative() {
+//     negativeButton.addEventListener("click", function() {
+//         if (firstNumber && operatorSymbol) {
+//             if (secondNumber.charAt(0) === "-") {
+//                 secondNumber = secondNumber.substring(1);
+//                 secondNumber = secondNumber.replace(firstNumber,"");
+//                 problemDisplay.textContent = firstNumber + " " + operatorSymbol + " " + secondNumber;
+//                 return secondNumber; 
+//             } else {
+//                 secondNumber = "-" + secondNumber;
+//                 secondNumber = secondNumber.replace(firstNumber,"");
+//                 problemDisplay.textContent = firstNumber + " " + operatorSymbol + " " + secondNumber;
+//                 return secondNumber;
+//             }
+//         } else if (firstNumber && (operatorSymbol === "")) {
+//             if (firstNumber.charAt(0) === "-") {
+//                 firstNumber = firstNumber.substring(1);
+//                 problemDisplay.textContent = firstNumber + " " + operatorSymbol + " " + secondNumber;
+//                 return firstNumber; 
+//             } else {
+//                 firstNumber = "-" + firstNumber;
+//                 problemDisplay.textContent = firstNumber + " " + operatorSymbol + " " + secondNumber;
+//                 return firstNumber;
+//             }
+//         } else {
+//             return;
+//         }
+//     })
 // }
+
+showOp();
+showCreateNum();
+// addRemoveNegative();
+clear();
+operate();

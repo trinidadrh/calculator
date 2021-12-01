@@ -86,6 +86,10 @@ body {
     font-size: 4rem;
 }
 
+#item3 {
+    color: lightgrey;
+}
+
 #itemFn { grid-area: fn; }
 #itemDs { grid-area: ds; }
 #item1 { grid-area: k1; }
